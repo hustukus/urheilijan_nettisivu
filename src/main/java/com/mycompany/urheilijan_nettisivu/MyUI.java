@@ -7,6 +7,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -24,22 +25,43 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
+        
+        final VerticalLayout baseLayout = new VerticalLayout();
+        baseLayout.setSizeFull();
+        
+        final VerticalLayout headingPictureLayout = new VerticalLayout();
+        headingPictureLayout.setHeight("30%");
+        Label pictureLabel = new Label("kuvan pitäisi tulla tähän");
+        
+        final VerticalLayout restOfthepageLayout = new VerticalLayout();
+        restOfthepageLayout.setHeight("70%");
         
         final TextField name = new TextField();
         name.setCaption("Type your name here:");
 
         Button button = new Button("Click Me");
         button.addClickListener( e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
+            baseLayout.addComponent(new Label("Thanks " + name.getValue() 
                     + ", it works!"));
         });
         
-        layout.addComponents(name, button);
-        layout.setMargin(true);
-        layout.setSpacing(true);
+        final HorizontalLayout leftsideMenuLayout = new HorizontalLayout();
+        leftsideMenuLayout.setWidth("20%");
         
-        setContent(layout);
+        Button button1 = new Button("nappi 1");
+        Button button2 = new Button("nappi 2");
+        Button button3 = new Button("nappi 3");
+        
+        leftsideMenuLayout.addComponents(button1, button2, button3);
+        headingPictureLayout.addComponent(pictureLabel);
+        restOfthepageLayout.addComponents(name, button);
+
+        baseLayout.addComponents(headingPictureLayout, restOfthepageLayout, leftsideMenuLayout);
+        baseLayout.setMargin(true);
+        baseLayout.setSpacing(true);
+        
+        setContent(baseLayout);
+    
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
