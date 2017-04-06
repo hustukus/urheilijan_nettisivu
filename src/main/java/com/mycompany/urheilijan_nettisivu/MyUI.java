@@ -4,13 +4,16 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
@@ -83,38 +86,72 @@ public class MyUI extends UI {
         setContent(baseGridLayout);
         */
         
+        // layout, jonka päälle kaikki muu rakentuu (root-layout)
         final AbsoluteLayout baseLayout = new AbsoluteLayout();
         baseLayout.setSizeFull();
         setContent(baseLayout);
         
+        // muut layoutit, joihin kaikki komponentit tulee (layouttien sisään voi pistää myös uusia layouttteja)
         final HorizontalLayout pictureLayout = new HorizontalLayout();
         pictureLayout.setSizeFull();
         final VerticalLayout leftsideMenuLayout = new VerticalLayout(); 
         leftsideMenuLayout.setSizeFull();
+        leftsideMenuLayout.setSpacing(false);
+        //leftsideMenuLayout.setMargin(true);
+
         final VerticalLayout middleLayout = new VerticalLayout();
         middleLayout.setSizeFull();
         final VerticalLayout calendarLayout = new VerticalLayout();
         calendarLayout.setSizeFull();
         
+        // random täytetavaraa layouteille
         Label pictureLabel = new Label("kuvan pitäisi tulla tähän");
-        Button nappula1 = new Button("siirtymä 1");
-        Button nappula2 = new Button("siirtymä 2");
+        Button nappula1 = new Button("Esittely");
+        Button nappula2 = new Button("Kuvat");
+        Button nappula3 = new Button("Kalenteri");
+        Button nappula4 = new Button("Blogitekstit");
         Label calendarLabel = new Label("kalenterijutut tänne");
         
+        
+        // A theme resource in the current theme ("mytheme")
+        // Located in: VAADIN/themes/mytheme/img/themeimage.png
+        ThemeResource resource = new ThemeResource("images/harkkatyo_kansikuva.png");
+
+        // Use the resource
+        Image coverPicture = new Image(null, resource);
+        
+        
+        // sisältö sivun keskiosaan, johon pitäisi tulla blogitekstit (yms?)
+        // panelin sisällä on VerticalLayout, ja VerticalLayoutissa on label
         Panel containerPanel = new Panel();
         containerPanel.setSizeFull();
         VerticalLayout containerLayout = new VerticalLayout();
         containerLayout.setMargin(true);
-        Label middleLabel = new Label("vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee ");
-        containerLayout.addComponent(middleLabel);
+        Panel middlePanel = new Panel("vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee ");
+        middlePanel.addStyleName("basic-style");
+        containerLayout.addComponent(middlePanel);
         containerPanel.setContent(containerLayout);
         
-        pictureLayout.addComponent(pictureLabel);
+        leftsideMenuLayout.setStyleName("basic-style");
+        
+        // lisätään random täytekomponentit omiin Layouttteihinsa
+        pictureLayout.addComponent(coverPicture);
         leftsideMenuLayout.addComponent(nappula1);
         leftsideMenuLayout.addComponent(nappula2);
+        leftsideMenuLayout.addComponent(nappula3);
+        leftsideMenuLayout.addComponent(nappula4);
+
         middleLayout.addComponent(containerPanel);
         calendarLayout.addComponent(calendarLabel);
         
+        pictureLayout.setComponentAlignment(coverPicture,Alignment.MIDDLE_CENTER);
+        leftsideMenuLayout.setComponentAlignment(nappula1,Alignment.MIDDLE_CENTER);
+        leftsideMenuLayout.setComponentAlignment(nappula2,Alignment.MIDDLE_CENTER);
+        leftsideMenuLayout.setComponentAlignment(nappula3,Alignment.MIDDLE_CENTER);
+        leftsideMenuLayout.setComponentAlignment(nappula4,Alignment.MIDDLE_CENTER);
+        
+        
+        // määritellään peruslayoutin(baselayout) sisällä/päällä olevien layouttien paikat
         baseLayout.addComponent(pictureLayout, "left: 0%; right: 0%;" + "top: 0%; bottom: 70%;");
         baseLayout.addComponent(leftsideMenuLayout, "left: 0%; right: 80%;" + "top: 30%; bottom: 0%;");
         baseLayout.addComponent(middleLayout, "left: 20%; right: 20%;" + "top: 30%; bottom: 0%;");

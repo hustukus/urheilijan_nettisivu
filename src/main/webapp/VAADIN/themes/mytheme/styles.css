@@ -12984,3 +12984,16 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .v-layout {
+	height: 30px;
+	background-color: #6ca88b;
+}
+
+.mytheme .v-slot {
+	color: #6ca88b;
+}
+
+.mytheme .basic-style {
+	background-color: #6ca88b;
+}

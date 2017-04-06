@@ -29,10 +29,26 @@
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
 
+ $backgroundcolor: #6ca88b;
+
 @import "../valo/valo.scss";
 
 @mixin mytheme {
   @include valo;
 
   // Insert your own theme rules here
+  
+  /* ?????????? it's not working
+  .v-layout{
+    background-color: #6ca88b;
+  }
+  */
+
+  //eipä taida tämäkään toimia https://vaadin.com/docs/-/part/framework/layout/layout-orderedlayout.html
+
+  .basic-style{
+    background-color: $backgroundcolor;
+  }
+
+
 }
