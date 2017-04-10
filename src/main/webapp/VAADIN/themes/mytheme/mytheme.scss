@@ -37,18 +37,12 @@
   @include valo;
 
   // Insert your own theme rules here
-  
-  /* ?????????? it's not working
-  .v-layout{
-    background-color: #6ca88b;
-  }
-  */
-
-  //eipä taida tämäkään toimia https://vaadin.com/docs/-/part/framework/layout/layout-orderedlayout.html
 
   .basic-style{
     background-color: $backgroundcolor;
   }
-
+  .leftsidemenustyle{
+      background-color: $backgroundcolor;
+  }
 
 }
