@@ -29,7 +29,7 @@
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
 
- $backgroundcolor: #6ca88b;
+ $backgroundcolor: #F5F5F5;
 
 @import "../valo/valo.scss";
 
@@ -38,11 +38,35 @@
 
   // Insert your own theme rules here
 
+  .v-absolutelayout-backgroundstyle, v-horizontallayout-backgroundstyle, v-verticallayout-backgroundstyle {
+    background-image: url("images/blurredforest.jpg");
+    background-repeat: repeat;
+}
+  /*
   .basic-style{
     background-color: $backgroundcolor;
+    border: 0px;
+    box-shadow: 0px 0px;
   }
+  */
   .leftsidemenustyle{
       background-color: $backgroundcolor;
+  }
+  .v-absolutelayout-wrapper{
+      padding: 10px;
+  }
+  .v-panel-caption, v-label{
+      line-height: 20px;
+      box-shadow: 0px;
+  }
+  .buttonstyle{
+      width: 100%;
+      border: 0px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+  }
+  .v-panel-content{
+      padding: 5px;
   }
 
 }

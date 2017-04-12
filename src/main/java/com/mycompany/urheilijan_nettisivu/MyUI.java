@@ -90,22 +90,30 @@ public class MyUI extends UI {
         final AbsoluteLayout baseLayout = new AbsoluteLayout();
         baseLayout.setSizeFull();
         setContent(baseLayout);
+        baseLayout.setStyleName("backgroundstyle");
         
+        /*
+        ThemeResource metsaResource = new ThemeResource("images/metsa.jpg");
+
+        // Use the resource
+        Image basePicture = new Image(null, metsaResource); 
+        */
         // muut layoutit baselayoutin jälkeen, joihin kaikki komponentit tulee (layouttien sisään voi pistää myös uusia layouttteja)
         final HorizontalLayout pictureLayout = new HorizontalLayout();
         pictureLayout.setSizeFull();
         final AbsoluteLayout leftsideMenuLayout = new AbsoluteLayout(); 
         leftsideMenuLayout.setSizeFull();
-        leftsideMenuLayout.setStyleName("leftsidemenustyle");
         final VerticalLayout middleLayout = new VerticalLayout();
         middleLayout.setSizeFull();
         final VerticalLayout calendarLayout = new VerticalLayout();
+        calendarLayout.setSizeFull();
+        calendarLayout.setMargin(true);
         
         // kuvan lisääminen sivun yläosaan
         
         // A theme resource in the current theme ("mytheme")
         // Located in: VAADIN/themes/mytheme/img/themeimage.png
-        ThemeResource resource = new ThemeResource("images/harkkatyo_kansikuva.png");
+        ThemeResource resource = new ThemeResource("images/kuvaEmmi.jpg");
 
         // Use the resource
         Image coverPicture = new Image(null, resource);        
@@ -119,6 +127,10 @@ public class MyUI extends UI {
         Button nappula2 = new Button("Kuvat");
         Button nappula3 = new Button("Kalenteri");
         Button nappula4 = new Button("Blogitekstit");
+        nappula1.setStyleName("buttonstyle");
+        nappula2.setStyleName("buttonstyle");
+        nappula3.setStyleName("buttonstyle");
+        nappula4.setStyleName("buttonstyle");
         helpingLayout.addComponents(nappula1, nappula2, nappula3, nappula4);
         helpingLayout.setComponentAlignment(nappula1,Alignment.MIDDLE_CENTER);
         helpingLayout.setComponentAlignment(nappula2,Alignment.MIDDLE_CENTER);
@@ -129,26 +141,39 @@ public class MyUI extends UI {
         // panelin sisällä on VerticalLayout, ja VerticalLayoutissa on taas panel
         Panel containerPanel = new Panel();
         containerPanel.setSizeFull();
+        containerPanel.setStyleName("basic-style");
         VerticalLayout containerLayout = new VerticalLayout();
         containerLayout.setMargin(true);
-        Panel middlePanel = new Panel("vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee vitusti kaikkee ");
-        middlePanel.addStyleName("basic-style");
-        containerLayout.addComponent(middlePanel);
+        GridLayout middlecontainerLayout = new GridLayout();
+        
+        Label introLabel = new Label("Tästä löytyvät viimeisimmät blogitekstini ja kuvani");
+
+        containerLayout.addComponent(middlecontainerLayout);
         containerPanel.setContent(containerLayout);
         
         // oikean palkin sisältö
-        VerticalLayout calendarHelpingLayout = new VerticalLayout();
+        
+        //VerticalLayout calendarHelpingLayout = new VerticalLayout();
+        VerticalLayout panelContentLayout = new VerticalLayout();
         Label calendarLabel = new Label("Täältä näet tulevat tapahtumat. Jee!");
-        Panel calendarPanel = new Panel("Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostainTänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain");        
-        calendarHelpingLayout.addComponents(calendarLabel, calendarPanel);
-        calendarHelpingLayout.setSizeFull();
+        Label calendarLabel2 = new Label("Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostainTänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain");
+                Label calendarLabel3 = new Label("Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostainTänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain");
+
+        Panel calendarPanel = new Panel("Täältä näet tulevat tapahtumat. Jee!");        
+        calendarPanel.setSizeFull();
+        calendarPanel.setStyleName("basic-style");
+        panelContentLayout.addComponents(calendarLabel, calendarLabel2, calendarLabel3);
+        calendarPanel.setContent(panelContentLayout);
+        /*calendarHelpingLayout.addComponents(calendarLabel, calendarPanel);
+        calendarHelpingLayout.setWidth("100%");
         calendarHelpingLayout.setMargin(true);
+        */
         
         // lisätään sisältö omiin Layouttteihinsa
         pictureLayout.addComponent(coverPicture);
         leftsideMenuLayout.addComponent(helpingLayout, "left: 0%; right: 0%;" + "top: 30%; bottom: 30%;");
         middleLayout.addComponent(containerPanel);
-        calendarLayout.addComponent(calendarHelpingLayout);
+        calendarLayout.addComponents(calendarPanel);
         
         // määritellään komponenteille paikka layouttiensa sisällä
         pictureLayout.setComponentAlignment(coverPicture,Alignment.MIDDLE_CENTER);
@@ -157,6 +182,7 @@ public class MyUI extends UI {
         */
         
         // määritellään peruslayoutin(baselayout) sisällä/päällä olevien layouttien paikat
+        //baseLayout.addComponent(basePicture);
         baseLayout.addComponent(pictureLayout, "left: 0%; right: 0%;" + "top: 0%; bottom: 70%;");
         baseLayout.addComponent(leftsideMenuLayout, "left: 0%; right: 80%;" + "top: 30%; bottom: 0%;");
         baseLayout.addComponent(middleLayout, "left: 20%; right: 20%;" + "top: 30%; bottom: 0%;");
