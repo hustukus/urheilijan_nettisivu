@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -15,6 +16,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -108,81 +110,92 @@ public class MyUI extends UI {
         final VerticalLayout calendarLayout = new VerticalLayout();
         calendarLayout.setSizeFull();
         calendarLayout.setMargin(true);
-        
-        // kuvan lisääminen sivun yläosaan
-        
-        // A theme resource in the current theme ("mytheme")
-        // Located in: VAADIN/themes/mytheme/img/themeimage.png
-        ThemeResource resource = new ThemeResource("images/kuvaEmmi.jpg");
+        calendarLayout.setStyleName("rightsidemenustyle");        
 
-        // Use the resource
+        
+        // KANSIKUVA, kuvan lisääminen sivun yläosaan
+        // Located in: VAADIN/themes/mytheme/imgages/kuvaEmmi.jpg
+        ThemeResource resource = new ThemeResource("images/kuvaEmmi.jpg");
         Image coverPicture = new Image(null, resource);        
         
+        // VASEMMAN PALKIN SISÄLTÖ
         
-        // vasemman palkin sisältö
-        VerticalLayout helpingLayout = new VerticalLayout();
+        final VerticalLayout helpingLayout = new VerticalLayout();
         helpingLayout.setWidth("100%");
         helpingLayout.setHeightUndefined();
-        Button nappula1 = new Button("Esittely");
-        Button nappula2 = new Button("Kuvat");
-        Button nappula3 = new Button("Kalenteri");
-        Button nappula4 = new Button("Blogitekstit");
-        nappula1.setStyleName("buttonstyle");
-        nappula2.setStyleName("buttonstyle");
-        nappula3.setStyleName("buttonstyle");
-        nappula4.setStyleName("buttonstyle");
-        helpingLayout.addComponents(nappula1, nappula2, nappula3, nappula4);
-        helpingLayout.setComponentAlignment(nappula1,Alignment.MIDDLE_CENTER);
-        helpingLayout.setComponentAlignment(nappula2,Alignment.MIDDLE_CENTER);
-        helpingLayout.setComponentAlignment(nappula3,Alignment.MIDDLE_CENTER);
-        helpingLayout.setComponentAlignment(nappula4,Alignment.MIDDLE_CENTER);
+        Button esittelyNappula = new Button("Esittely");
+        Button kuvatNappula = new Button("Kuvat");
+        Button kalenteriNappula = new Button("Kalenteri");
+        Button blogiteksitNappula = new Button("Blogitekstit");
+        esittelyNappula.setStyleName("buttonstyle");
+        kuvatNappula.setStyleName("buttonstyle");
+        kalenteriNappula.setStyleName("buttonstyle");
+        blogiteksitNappula.setStyleName("buttonstyle");
+        helpingLayout.addComponents(esittelyNappula, kuvatNappula, kalenteriNappula, blogiteksitNappula);
+        helpingLayout.setComponentAlignment(esittelyNappula,Alignment.MIDDLE_CENTER);
+        helpingLayout.setComponentAlignment(kuvatNappula,Alignment.MIDDLE_CENTER);
+        helpingLayout.setComponentAlignment(kalenteriNappula,Alignment.MIDDLE_CENTER);
+        helpingLayout.setComponentAlignment(blogiteksitNappula,Alignment.MIDDLE_CENTER);
         
-        //keskiosan sisällöt
-        // panelin sisällä on VerticalLayout, ja VerticalLayoutissa on taas panel
+        // KESKIOSAN SISÄLTÖ
+        
+        // panelin sisällä on VerticalLayout, johon komponentit listätään perätysten
         Panel containerPanel = new Panel();
         containerPanel.setSizeFull();
-        containerPanel.setStyleName("basic-style");
+        
         VerticalLayout containerLayout = new VerticalLayout();
         containerLayout.setMargin(true);
-        GridLayout middlecontainerLayout = new GridLayout();
+        containerLayout.setSizeFull();
+        Label introLabel = new Label("Tästä löytyvät viimeisimmät blogitekstini ja kuvani!");
+        introLabel.setStyleName("headertextstyle");
+        Label footer = new Label("Tänne sitten kaikki footer-jutut, yhteystiedot, sponssit sun muut");
+        Label blogiTeksti1 = new Label("Tässä meillä pitkääkin pitempi blogiteksti numero 1"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 1 " 
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 1 "
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 1 "
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 1 "
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 1 ");
+        blogiTeksti1.setWidth("100%");
+        Label blogiTeksti2 = new Label("Tässä meillä pitkääkin pitempi blogiteksti numero 2"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 2"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 2"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 2"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 2"
+                + "Tässä meillä pitkääkin pitempi blogiteksti numero 2");
+        blogiTeksti2.setWidth("100%");
         
-        Label introLabel = new Label("Tästä löytyvät viimeisimmät blogitekstini ja kuvani");
+        // komponentit lisätään keskikohtaan
+        containerLayout.addComponents(introLabel, blogiTeksti1, blogiTeksti2, footer);
+        
+        // määritellään komponenttein suhteet keskiosan sisällä
+        containerLayout.setExpandRatio(introLabel, 1);
+        containerLayout.setExpandRatio(blogiTeksti1, 2);
+        containerLayout.setExpandRatio(blogiTeksti2, 2);
+        containerLayout.setExpandRatio(footer, 1);
 
-        containerLayout.addComponent(middlecontainerLayout);
         containerPanel.setContent(containerLayout);
         
-        // oikean palkin sisältö
+        // OIKEAN PALKIN SISÄLTÖ
         
-        //VerticalLayout calendarHelpingLayout = new VerticalLayout();
-        VerticalLayout panelContentLayout = new VerticalLayout();
-        Label calendarLabel = new Label("Täältä näet tulevat tapahtumat. Jee!");
-        Label calendarLabel2 = new Label("Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostainTänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain");
-                Label calendarLabel3 = new Label("Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostainTänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain Tänne sitten tulee nuita tulevia tapaahtumia jahka ne saadaan jostain");
-
-        Panel calendarPanel = new Panel("Täältä näet tulevat tapahtumat. Jee!");        
+        final Panel calendarPanel = new Panel("Tulevat tapahtumat:");
         calendarPanel.setSizeFull();
-        calendarPanel.setStyleName("basic-style");
-        panelContentLayout.addComponents(calendarLabel, calendarLabel2, calendarLabel3);
-        calendarPanel.setContent(panelContentLayout);
-        /*calendarHelpingLayout.addComponents(calendarLabel, calendarPanel);
-        calendarHelpingLayout.setWidth("100%");
-        calendarHelpingLayout.setMargin(true);
-        */
+        VerticalLayout panelContentLayout = new VerticalLayout();
         
-        // lisätään sisältö omiin Layouttteihinsa
+        // esimerkkeinä nyt pelkkiä staattisia linkkejä -> tähtäimessä jokin metodi, joka osaisi hakea linkit suoraan sivulta
+        Link link1 = new Link("Maakunnallinen 50m kiväärin makuun sarjakilpailu", new ExternalResource("https://www.ampumaurheiluliitto.fi/kalenteri/kilpailut/kilpailu/?id=293"));
+        Link link2 = new Link("ESA:n kevätpiekkari", new ExternalResource("https://www.ampumaurheiluliitto.fi/kalenteri/kilpailut/kilpailu/?id=289"));
+        Link link3 = new Link("Nuorten EM-näyttökilkailu 2, Turku", new ExternalResource("https://www.ampumaurheiluliitto.fi/kalenteri/kilpailut/kilpailu/?id=281"));
+        panelContentLayout.addComponents(link1, link2, link3);
+        calendarPanel.setContent(panelContentLayout);
+        
+        // LISÄTÄÄN SISÄLTÖ OMIIN LAYOUTTEIHINSA
         pictureLayout.addComponent(coverPicture);
+        pictureLayout.setComponentAlignment(coverPicture,Alignment.MIDDLE_CENTER);
         leftsideMenuLayout.addComponent(helpingLayout, "left: 0%; right: 0%;" + "top: 30%; bottom: 30%;");
         middleLayout.addComponent(containerPanel);
         calendarLayout.addComponents(calendarPanel);
-        
-        // määritellään komponenteille paikka layouttiensa sisällä
-        pictureLayout.setComponentAlignment(coverPicture,Alignment.MIDDLE_CENTER);
-        /*
 
-        */
-        
         // määritellään peruslayoutin(baselayout) sisällä/päällä olevien layouttien paikat
-        //baseLayout.addComponent(basePicture);
         baseLayout.addComponent(pictureLayout, "left: 0%; right: 0%;" + "top: 0%; bottom: 70%;");
         baseLayout.addComponent(leftsideMenuLayout, "left: 0%; right: 80%;" + "top: 30%; bottom: 0%;");
         baseLayout.addComponent(middleLayout, "left: 20%; right: 20%;" + "top: 30%; bottom: 0%;");

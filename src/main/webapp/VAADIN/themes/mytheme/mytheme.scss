@@ -38,6 +38,7 @@
 
   // Insert your own theme rules here
 
+  // background picture for the whole page
   .v-absolutelayout-backgroundstyle, v-horizontallayout-backgroundstyle, v-verticallayout-backgroundstyle {
     background-image: url("images/blurredforest.jpg");
     background-repeat: repeat;
@@ -67,6 +68,13 @@
   }
   .v-panel-content{
       padding: 5px;
+  }
+  .rightsidemenustyle{
+      padding: 15px;
+  }
+  .headertextstyle{
+      font-size: 20px;
+      text-align: center;
   }
 
 }

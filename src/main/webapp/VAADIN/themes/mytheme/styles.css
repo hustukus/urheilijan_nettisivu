@@ -12994,10 +12994,8 @@ div.v-layout.v-horizontal.v-widget {
 	background-color: #F5F5F5;
 }
 
-.mytheme .calendarlayoutstyle {
-	background-color: #F5F5F5;
-	padding: 15px;
-	margin: 0 px;
+.mytheme .v-absolutelayout-wrapper {
+	padding: 10px;
 }
 
 .mytheme .v-panel-caption, .mytheme v-label {
@@ -13014,4 +13012,13 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .v-panel-content {
 	padding: 5px;
+}
+
+.mytheme .rightsidemenustyle {
+	padding: 15px;
+}
+
+.mytheme .headertextstyle {
+	font-size: 20px;
+	text-align: center;
 }
