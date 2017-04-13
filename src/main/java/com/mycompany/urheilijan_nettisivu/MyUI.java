@@ -35,71 +35,12 @@ public class MyUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         
-        /*
-        final CustomLayout baseLayout = new CustomLayout();
-        
-        final HorizontalLayout pictureLayout = new HorizontalLayout();
-        
-        final GridLayout baseGridLayout = new GridLayout(6, 6);
-        baseGridLayout.setSizeFull();
-        
-        Label pictureLabel = new Label("kuvan pitäisi tulla tähän");
-        
-        Label pictureLabel2 = new Label("kuvan pitäisi tulla tähän");
-        Label pictureLabel3 = new Label("kuvan pitäisi tulla tähän");
-        Label pictureLabel4 = new Label("kuvan pitäisi tulla tähän");
-        
-        Label leftsideMenuLabel = new Label("vasemman menujutun pitäisi tulal tähän");
-        
-        Label calendarLabel = new Label("kalenteri/tapahtumajutun pitäisi tulla tänne");
-        
-        final VerticalLayout restOfthepageLayout = new VerticalLayout();
-        restOfthepageLayout.setHeight("70%");
-        restOfthepageLayout.setWidth("100%");
-        
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
-
-        Button button = new Button("Click Me");
-        button.addClickListener( e -> {
-            restOfthepageLayout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
-        
-        Button button1 = new Button("nappi 1");
-        Button button2 = new Button("nappi 2");
-        Button button3 = new Button("nappi 3");
-        
-        restOfthepageLayout.addComponents(name, button, button1, button2, button3);
-        
-        baseGridLayout.addComponent(pictureLabel, 0, 0);
-        
-        baseGridLayout.addComponent(leftsideMenuLabel, 0, 2);
-        baseGridLayout.addComponent(pictureLabel3, 1, 2);
-        baseGridLayout.addComponent(calendarLabel, 5, 2);
-        
-        //baseGridLayout.addComponent(pictureLabel, 2, 6, 0, 0);
-        //baseGridLayout.addComponent(restOfthepageLayout, 4, 4, 1, 3);
-        //baseGridLayout.addComponent(leftsideMenuLabel, 1, 4, 0, 3);
-        //baseGridLayout.addComponent(calendarLabel, 1, 4, 6, 3);
-        baseGridLayout.setMargin(true);
-        baseGridLayout.setSpacing(true);
-        
-        setContent(baseGridLayout);
-        */
-        
         // layout, jonka päälle kaikki muu rakentuu (root-layout)
         final AbsoluteLayout baseLayout = new AbsoluteLayout();
         baseLayout.setSizeFull();
         setContent(baseLayout);
         baseLayout.setStyleName("backgroundstyle");
-        
-        /*
-        ThemeResource metsaResource = new ThemeResource("images/metsa.jpg");
 
-        // Use the resource
-        Image basePicture = new Image(null, metsaResource); 
-        */
         // muut layoutit baselayoutin jälkeen, joihin kaikki komponentit tulee (layouttien sisään voi pistää myös uusia layouttteja)
         final HorizontalLayout pictureLayout = new HorizontalLayout();
         pictureLayout.setSizeFull();
